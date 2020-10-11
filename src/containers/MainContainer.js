@@ -58,11 +58,11 @@ class MainContainer extends Component {
 			likedStocks: newList()
 		});
     };
-    filteredStocks = () => {
+    filteredStocks = (stockDataSource) => {
         if(this.state.alphabetically === false && this.state.price === false){
-            return this.state.api
+            return stockDataSource
         } else if(this.state.alphabetically === true){
-            return this.state.api.sort((a, b) => {
+            return stockDataSource.sort((a, b) => {
                 if(a.name < b.name){
                     return -1;
                 }
@@ -72,16 +72,16 @@ class MainContainer extends Component {
                 return 0
             })
         } else if(this.state.price === true){
-            return this.state.api.sort((a, b) => {
+            return stockDataSource.sort((a, b) => {
                 return b.price - a.price
             })
         } 
     }
-    categoryFiltered = (filteredWord) => {
+    categoryFiltered = (filteredWord, stockDataSource) => {
         if(this.state.filterOption === ''){
-             return this.filteredStocks()
+             return this.filteredStocks(stockDataSource)
         } else {
-            return this.filteredStocks().filter(stock => {
+            return this.filteredStocks(stockDataSource).filter(stock => {
                 return stock.type === filteredWord
             })
         }
@@ -100,10 +100,10 @@ class MainContainer extends Component {
 
 				<div className="row">
 					<div className="col-8">
-						<StockContainer clickHandler={this.stockClickHandler} stocks={this.categoryFiltered} alphabetically={this.state.alphabetically} price={this.state.price} filter={this.state.filterOption}/>
+						<StockContainer clickHandler={this.stockClickHandler} stocks={this.categoryFiltered} stockDataSource={this.state.api} alphabetically={this.state.alphabetically} price={this.state.price} filter={this.state.filterOption}/>
 					</div>
 					<div className="col-4">
-						<PortfolioContainer clickHandler={this.removeFromPortfolio} stocks={this.state.likedStocks} filter={this.state.filterOption} />
+						<PortfolioContainer clickHandler={this.removeFromPortfolio} stocks={this.categoryFiltered} stockDataSource={this.state.likedStocks} filter={this.state.filterOption} />
 					</div>
 				</div>
 			</div>

@@ -33,7 +33,7 @@ class StockContainer extends Component {
     // }
 
     renderStocks = () => {
-        return this.props.stocks(this.props.filter).map(stock => {
+        return this.props.stocks(this.props.filter, this.props.stockDataSource).map(stock => {
             return <Stock clickHandler={this.props.clickHandler}key={stock.id} stock={stock}/>
         })
     }
