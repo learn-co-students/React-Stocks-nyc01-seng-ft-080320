@@ -7,6 +7,8 @@ class MainContainer extends Component {
     state={
         stockList: [],
         myStocks: [],
+        filterVal: "",
+        sortVal: ""
     }
 
     componentDidMount(){
@@ -34,16 +36,36 @@ class MainContainer extends Component {
         this.setState({myStocks: newArray})
     }
 
+    filterHandler = (value) => {
+        this.setState({filterVal: value})
+    }
+
+    sortHandler = (value) => {
+        this.setState({sortVal: value})
+    }
+
+    filterOrSortStocks = () => {
+        if (this.state.filterVal.length > 0){
+            return this.state.stockList.filter(stock => stock.type.includes(this.state.filterVal))
+        } else {
+            return this.state.stockList
+        }
+    }
+
 
     render() {
         return (
         <div>
-            <SearchBar/>
-
+            <SearchBar 
+                filterVal={this.state.filterVal} 
+                filterHandler={this.filterHandler}
+                sortVal={this.state.sortVal}
+                sortHandler={this.sortHandler}
+            />
             <div className="row">
                 <div className="col-8">
 
-                <StockContainer stockList={this.state.stockList} clickHandler={this.buyStock}/>
+                <StockContainer stockList={this.filterOrSortStocks()} clickHandler={this.buyStock}/>
 
                 </div>
                 <div className="col-4">
