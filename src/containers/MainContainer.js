@@ -37,11 +37,21 @@ class MainContainer extends Component {
     }
 
     filterHandler = (value) => {
-        this.setState({filterVal: value})
+        this.setState(() =>{
+            return {
+                filterVal: value,
+                sortVal: ""
+            }
+        })
     }
 
     sortHandler = (value) => {
-        this.setState({sortVal: value})
+        this.setState(() => {
+            return {
+                sortVal: value,
+                filterVal: ""
+            }
+        })
     }
 
     filterOrSortStocks = () => {
@@ -63,7 +73,7 @@ class MainContainer extends Component {
     }
 
     sortAlphabetically = () => {
-        return this.state.stockList.sort((stockA, stockB) => stockA.name.localeCompare(stockB.name))
+        return this.state.stockList.sort((stockA, stockB) => stockA.ticker.localeCompare(stockB.ticker))
     }
 
 
