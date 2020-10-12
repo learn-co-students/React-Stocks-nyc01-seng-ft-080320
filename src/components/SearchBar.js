@@ -30,7 +30,7 @@ const SearchBar = (props) => {
 			<label>
 				<strong>Filter:</strong>
 				<select name="filterOption" onChange={props.changeHandler}>
-					<option value=""></option>
+					<option value="">All Stocks</option>
 					<option value="Tech">Tech</option>
 					<option value="Sportswear">Sportswear</option>
 					<option value="Finance">Finance</option>
