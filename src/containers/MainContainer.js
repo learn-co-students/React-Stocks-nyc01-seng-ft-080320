@@ -97,7 +97,7 @@ class MainContainer extends Component {
 		return (
 			<div>
 				<SearchBar
-					filterHandler={this.filterHandler}
+					// filterHandler={this.filterHandler}
 					changeHandler={this.radioChangeHandler}
 					alphabetically={this.state.alphabetically}
 					price={this.state.price}
