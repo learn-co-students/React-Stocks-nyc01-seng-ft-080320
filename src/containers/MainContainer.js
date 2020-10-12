@@ -20,7 +20,7 @@ class MainContainer extends Component {
 		});
 	}
 
-	radioChangeHadler = (e) => {
+	radioChangeHandler = (e) => {
 		if (e.target.value === 'Alphabetically') {
 			this.setState({
 				alphabetically: true,
@@ -31,15 +31,19 @@ class MainContainer extends Component {
 				alphabetically: false,
 				price: true
 			});
-		}
+		} else {
+            this.setState({
+                [e.target.name]: e.target.value
+            })
+        }
 	};
 
-	filterHandler = (e) => {
-        console.log(e.target.value)
-		this.setState({
-			filterOption: e.target.value
-		});
-	};
+	// filterHandler = (e) => {
+    //     console.log(e.target.value)
+	// 	this.setState({
+	// 		filterOption: e.target.value
+	// 	});
+	// };
 
 	stockClickHandler = (stockObj) => {
 		if (!this.state.likedStocks.includes(stockObj)) {
@@ -94,7 +98,7 @@ class MainContainer extends Component {
 			<div>
 				<SearchBar
 					filterHandler={this.filterHandler}
-					changeHandler={this.radioChangeHadler}
+					changeHandler={this.radioChangeHandler}
 					alphabetically={this.state.alphabetically}
 					price={this.state.price}
 				/>
