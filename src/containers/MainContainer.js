@@ -35,6 +35,7 @@ class MainContainer extends Component {
 	};
 
 	filterHandler = (e) => {
+        console.log(e.target.value)
 		this.setState({
 			filterOption: e.target.value
 		});
