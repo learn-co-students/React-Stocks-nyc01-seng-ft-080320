@@ -4,27 +4,38 @@ import PortfolioContainer from './PortfolioContainer'
 import SearchBar from '../components/SearchBar'
 
 class MainContainer extends Component {
+    state={
+        stockList: []
+    }
 
-  render() {
-    return (
-      <div>
-        <SearchBar/>
+    componentDidMount(){
+        fetch('http://localhost:3000/stocks')
+            .then(resp => resp.json())
+            .then(data => this.setState({stockList: data}))
+    }
 
-          <div className="row">
-            <div className="col-8">
 
-              <StockContainer/>
+    render() {
+        
+        return (
+        <div>
+            <SearchBar/>
 
+            <div className="row">
+                <div className="col-8">
+
+                <StockContainer stockList={this.state.stockList}/>
+
+                </div>
+                <div className="col-4">
+
+                <PortfolioContainer/>
+
+                </div>
             </div>
-            <div className="col-4">
-
-              <PortfolioContainer/>
-
-            </div>
-          </div>
-      </div>
-    );
-  }
+        </div>
+        );
+    }
 
 }
 
