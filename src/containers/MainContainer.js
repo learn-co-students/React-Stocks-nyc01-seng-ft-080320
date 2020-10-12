@@ -47,9 +47,23 @@ class MainContainer extends Component {
     filterOrSortStocks = () => {
         if (this.state.filterVal.length > 0){
             return this.state.stockList.filter(stock => stock.type.includes(this.state.filterVal))
+        } else if (this.state.sortVal.length > 0) {
+            if (this.state.sortVal === "Price"){
+                return this.sortByPrice()
+            } else {
+                return this.sortAlphabetically()
+            }
         } else {
             return this.state.stockList
         }
+    }
+
+    sortByPrice = () => {
+        return this.state.stockList.sort((stockA, stockB) => stockA.price - stockB.price)
+    }
+
+    sortAlphabetically = () => {
+        return this.state.stockList.sort((stockA, stockB) => stockA.name.localeCompare(stockB.name))
     }
 
 
