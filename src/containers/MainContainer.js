@@ -8,7 +8,8 @@ class MainContainer extends Component {
   state={
     stocksURL: "http://localhost:3000/stocks/",
     allStocks: [],
-    portfolio: []
+    portfolio: [],
+    filterType: ""
   }
 
   fetchStocks = () => {
@@ -29,7 +30,6 @@ class MainContainer extends Component {
         }
       })
     }
-
   }
 
   removeFromPortfolio = (stock) => {
@@ -39,15 +39,19 @@ class MainContainer extends Component {
     this.setState({portfolio: newPortfolio})
   }
 
+  filterByType = (e) => {
+    this.setState({filterType: e.target.value})
+  }
+
   render() {
     return (
       <div>
-        <SearchBar/>
+        <SearchBar filterByType={this.filterByType}/>
 
           <div className="row">
             <div className="col-8">
 
-              <StockContainer allStocks={this.state.allStocks} addToPortfolio={this.addToPortfolio}/>
+              <StockContainer allStocks={this.state.allStocks} addToPortfolio={this.addToPortfolio} filterType={this.state.filterType}/>
 
             </div>
             <div className="col-4">

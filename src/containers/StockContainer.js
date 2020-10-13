@@ -4,7 +4,12 @@ import Stock from '../components/Stock'
 class StockContainer extends Component {
 
   renderStocks = () => {
-    return this.props.allStocks.map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
+    if (this.props.filterType === "All") {
+      return this.props.allStocks.map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
+    } else {
+      return this.props.allStocks.filter(s => s.type.includes(this.props.filterType)).map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
+    }
+
   }
 
   render() {
