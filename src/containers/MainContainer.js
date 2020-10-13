@@ -45,10 +45,7 @@ class MainContainer extends Component {
   }
 
   sort = (e) => {
-    console.log("in Main .sort()")
-    console.log(e.target.value)
     this.setState({sortType: e.target.value})
-
   }
 
   render() {
