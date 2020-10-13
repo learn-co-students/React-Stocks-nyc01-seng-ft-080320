@@ -3,11 +3,20 @@ import Stock from '../components/Stock'
 
 class StockContainer extends Component {
 
-  renderStocks = () => {
-    if (this.props.filterType === "All") {
-      return this.props.allStocks.map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
+  sortStocks = () => {
+    if (this.props.sortType === "Price") {
+      return this.props.allStocks.sort((a,b) => a.price > b.price ? 1 : -1)
     } else {
-      return this.props.allStocks.filter(s => s.type.includes(this.props.filterType)).map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
+      return this.props.allStocks.sort((a,b) => a.name.toLowerCase() > b.name.toLowerCase() ? 1 : -1)
+    }
+  }
+
+  renderStocks = () => {
+    let sortedStocks = this.sortStocks()
+    if (this.props.filterType === "All") {
+      return sortedStocks.map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
+    } else {
+      return sortedStocks.filter(s => s.type.includes(this.props.filterType)).map(stock => <Stock stock={stock} key={stock.id} changePortfolio={this.props.addToPortfolio} />)
     }
 
   }

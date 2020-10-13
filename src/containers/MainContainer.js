@@ -9,7 +9,8 @@ class MainContainer extends Component {
     stocksURL: "http://localhost:3000/stocks/",
     allStocks: [],
     portfolio: [],
-    filterType: ""
+    filterType: "",
+    sortType: ""
   }
 
   fetchStocks = () => {
@@ -43,15 +44,22 @@ class MainContainer extends Component {
     this.setState({filterType: e.target.value})
   }
 
+  sort = (e) => {
+    console.log("in Main .sort()")
+    console.log(e.target.value)
+    this.setState({sortType: e.target.value})
+
+  }
+
   render() {
     return (
       <div>
-        <SearchBar filterByType={this.filterByType}/>
+        <SearchBar filterByType={this.filterByType} sort={this.sort} sortType={this.state.sortType}/>
 
           <div className="row">
             <div className="col-8">
 
-              <StockContainer allStocks={this.state.allStocks} addToPortfolio={this.addToPortfolio} filterType={this.state.filterType}/>
+              <StockContainer allStocks={this.state.allStocks} addToPortfolio={this.addToPortfolio} filterType={this.state.filterType} sortType={this.state.sortType}/>
 
             </div>
             <div className="col-4">

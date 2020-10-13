@@ -6,11 +6,11 @@ const SearchBar = (props) => {
 
       <strong>Sort by:</strong>
       <label>
-        <input type="radio" value="Alphabetically" checked={null} onChange={null}/>
+        <input type="radio" value="Alphabetically" checked={props.sortType === "Price" ? false : true} onChange={props.sort}/>
         Alphabetically
       </label>
       <label>
-        <input type="radio" value="Price" checked={null} onChange={null}/>
+        <input type="radio" value="Price" checked={props.sortType === "Price" ? true : false} onChange={props.sort}/>
         Price
       </label>
       <br/>
