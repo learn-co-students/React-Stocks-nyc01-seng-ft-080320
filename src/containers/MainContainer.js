@@ -13,7 +13,7 @@ class MainContainer extends Component {
     this.state = {
       api:[],
       portfolio:[],
-      displayedPortfolio:[],
+      stockFilter:'',
     }
   }
 
@@ -44,69 +44,50 @@ class MainContainer extends Component {
         break;
       case "Tech":
         key=('Tech')
-        this.filterStocks(key)
+        this.setFilter(key)
         break;
       case "Sportswear":
         key=('Sportswear')
-        this.filterStocks(key)
+        this.setFilter(key)
         break;
       case "Finance":
         key=('Finance')
-        this.filterStocks(key)
+        this.setFilter(key)
         break;
       case "":
         key=('')
-        
-        this.filterStocks(key)
+        this.setFilter(key)
         break;
-        
-        
       default:
         break;
     }
   }
 
   render() {
-    // console.log(this.state.portfolio)
+    // console.log(this.state)
     return (
       <div>
         <SearchBar handleSortStocks={this.handleSortStocks}/>
-
           <div className="row">
             <div className="col-8">
-
               <StockContainer stocks={this.state.api} handlePortfolio={this.handlePortfolio}/>
-
             </div>
             <div className="col-4">
-
-              <PortfolioContainer portfolio={this.state.displayedPortfolio} handlePortfolio={this.handlePortfolio}/>
-
+              <PortfolioContainer 
+                portfolio={this.state.portfolio} 
+                handlePortfolio={this.handlePortfolio}
+                stockFilter={this.state.stockFilter}
+              />
             </div>
           </div>
       </div>
     );
   }
 
-  filterStocks = (key) => {
-    let portfolio = this.state.portfolio
-    let displayedPortfolio = []
-    
-    if(key === ''){
-      return(
-      this.setState({
-        displayedPortfolio: portfolio
-      }))
-    } 
-    
-    displayedPortfolio = portfolio.filter(stock => stock.type === key)
-
-    this.setState({
-      displayedPortfolio
-    })
+  setFilter = (stockFilter) => {
+    this.setState({stockFilter})
   }
   
-
   sortStocks = (key) => {
     let portfolio = this.state.portfolio
     let dataA, dataB
@@ -126,7 +107,7 @@ class MainContainer extends Component {
     })
 
     this.setState({
-      displayedPortfolio: portfolio
+      portfolio
     })
   }
   
@@ -156,19 +137,6 @@ class MainContainer extends Component {
       .then(res => res.json())
       .then(api => this.setState({api}))
   }
-  
-  componentDidUpdate(prevProps, prevState) {
-    if(prevState.displayedPortfolio === this.state.displayedPortfolio){
-      console.log('working')
-      // this.setState({displayedPortfolio: this.state.portfolio})
-
-      this.state.displayedPortfolio = this.state.portfolio
-      }
-      // console.log(this.state.displayedPortfolio)
-  }
-    
-
-  
 
 }
 

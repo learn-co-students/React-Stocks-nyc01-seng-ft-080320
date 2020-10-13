@@ -25,10 +25,6 @@ export default class SearchBar extends Component {
       })
     }
   }
-
-  handleFilterby = (event) => {
-    this.props.handleSortStocks(event)
-  }
   
 
   render() {
@@ -47,7 +43,7 @@ export default class SearchBar extends Component {
 
         <label>
           <strong>Filter:</strong>
-          <select onChange={this.handleFilterby}>
+          <select onChange={this.handleSortby}>
             <option value=''></option>
             <option value="Tech">Tech</option>
             <option value="Sportswear">Sportswear</option>
