@@ -7,7 +7,8 @@ class MainContainer extends Component {
 
   state={
     stocksURL: "http://localhost:3000/stocks/",
-    allStocks: []
+    allStocks: [],
+    portfolio: []
   }
 
   fetchStocks = () => {
@@ -20,6 +21,24 @@ class MainContainer extends Component {
     this.fetchStocks();
   }
 
+  addToPortfolio = (stock) => {
+    if (!this.state.portfolio.find(ms => ms.id === stock.id)) {
+      this.setState(prevState => {
+        return {
+          portfolio: [...prevState.portfolio, stock]
+        }
+      })
+    }
+
+  }
+
+  removeFromPortfolio = (stock) => {
+    let newPortfolio = [...this.state.portfolio]
+    let stockIndex = newPortfolio.findIndex(s => s.id === stock.id)
+    newPortfolio.splice(stockIndex, 1)
+    this.setState({portfolio: newPortfolio})
+  }
+
   render() {
     return (
       <div>
@@ -28,12 +47,12 @@ class MainContainer extends Component {
           <div className="row">
             <div className="col-8">
 
-              <StockContainer allStocks={this.state.allStocks}/>
+              <StockContainer allStocks={this.state.allStocks} addToPortfolio={this.addToPortfolio}/>
 
             </div>
             <div className="col-4">
 
-              <PortfolioContainer/>
+              <PortfolioContainer myStocks={this.state.portfolio} removeFromPortfolio={this.removeFromPortfolio} />
 
             </div>
           </div>
