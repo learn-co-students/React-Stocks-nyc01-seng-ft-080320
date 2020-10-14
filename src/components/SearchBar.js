@@ -2,6 +2,7 @@ import React from 'react';
 
 class SearchBar extends React.Component{
 
+  
   getSortValue = e =>{
     this.props.sortUpdate(e.target.value)
   }
@@ -11,9 +12,23 @@ class SearchBar extends React.Component{
   this.props.filterUpdate(e.target.value)
   }
 
+
+  updateStater = (e) =>{
+    this.props.updateSearch(e.target.value)
+  }
+
+
+
+
   render(){
   return (
+  
+
     <div>
+      <form onSubmit={this.searchHandler}>
+      <input type="text" value={this.props.search} onChange={this.updateStater}/>
+      <button value="search"/>
+      </form>
 
       <strong>Sort by:</strong>
       <label>

@@ -9,7 +9,8 @@ class MainContainer extends Component {
   state={
     api:[],
     filter: "All",
-    sort: "none"
+    sort: "none",
+    search:""
   }
 
   componentDidMount(){
@@ -51,8 +52,19 @@ class MainContainer extends Component {
     
   }
 
+
+  updateSearch = (searchValue) =>{
+    this.setState({search:searchValue})
+  }
+
+
   calculateStocks = () => {
     let filteredStocks = [...this.state.api]
+    if(this.state.search !== ""){
+      filteredStocks= filteredStocks.filter(stock=> stock.name.toLowerCase().includes(this.state.search.toLowerCase()))
+    }
+    console.log(filteredStocks)
+
     if(this.state.filter !== "All"){
       filteredStocks =  filteredStocks.filter(stock => stock.type === this.state.filter)        
     } 
@@ -75,7 +87,7 @@ class MainContainer extends Component {
     console.log(this.state)
     return (
       <div>
-        <SearchBar sort ={this.state.sort} filter = {this.state.filter} sortUpdate={this.sortUpdate} filterUpdate = {this.updateFilter}/>
+        <SearchBar sort ={this.state.sort} filter = {this.state.filter} sortUpdate={this.sortUpdate} filterUpdate = {this.updateFilter} updateSearch={this.updateSearch}/>
 
           <div className="row">
             <div className="col-8">
