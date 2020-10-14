@@ -20,3 +20,24 @@ After the stocks are fetched, your job is to:
 
 Best of luck!
 
+
+
+App
+|
+|- Header
+|
+|
+|-Main Container|
+                |
+                |
+                |-Search Bar
+                |
+                |
+                |-Stock Container|
+                |                 |
+                |                 |- Stocks
+                |                   |
+                |                   |
+                |                   |
+                |-Portfolio Container
+
